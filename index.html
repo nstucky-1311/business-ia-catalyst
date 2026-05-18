@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winclap — Business IA Catalyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Judson:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#FFFFFF;--black:#000000;
+  --bg-light:#FAFAFA;
+  --green:#1CC9B9;--orange:#FE805B;--purple:#CEABFF;
+  --green-bg:#E5F9F7;--green-bdr:#A8E4DF;
+  --orange-bg:#FEF1EC;--orange-bdr:#F7B99E;
+  --purple-bg:#F3EEFF;--purple-bdr:#D5C4FF;
+  --t1:#111111;--t2:#555555;--t3:#999999;--t4:#BBBBBB;
+  --gray:#E5E5E5;--gray2:#CCCCCC;
+  --radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg-light);color:var(--t1);
+  line-height:1.55;-webkit-font-smoothing:antialiased;
+  padding:56px 40px 64px;
+}
+.container{max-width:960px;margin:0 auto}
+
+.eyebrow{
+  font-size:11px;font-weight:700;color:var(--green);
+  text-transform:uppercase;letter-spacing:2.5px;margin-bottom:14px;
+}
+
+.header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding-bottom:28px;margin-bottom:48px;border-bottom:1px solid var(--gray);
+}
+.header h1{
+  font-family:'Judson',serif;font-weight:400;
+  font-size:52px;line-height:1.05;color:var(--t1);letter-spacing:-.5px;
+}
+.header h1 em{font-style:italic;font-weight:400}
+.header-right{text-align:right}
+.header-right .label{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
+.header-right .brand{font-family:'Judson',serif;font-weight:700;font-style:italic;font-size:22px;margin-top:6px;color:var(--t1)}
+
+.section{margin-bottom:56px}
+.section-title{font-family:'Judson',serif;font-weight:400;font-size:28px;color:var(--t1);letter-spacing:-.2px;margin-bottom:6px;line-height:1.2}
+.section-title em{font-style:italic}
+.section-sub{font-size:14px;color:var(--t2);margin-bottom:28px;max-width:700px}
+
+/* DISCLAIMER NEGRO */
+.disclaimer{
+  background:var(--black);color:var(--white);
+  border-radius:var(--radius);padding:36px 40px;margin-bottom:16px;
+}
+.disclaimer .eyebrow{color:var(--green);margin-bottom:14px}
+.disclaimer h2{font-family:'Judson',serif;font-weight:400;font-size:26px;line-height:1.25;margin-bottom:14px}
+.disclaimer h2 em{font-style:italic;color:var(--green)}
+.disclaimer p{font-size:14px;color:var(--t4);line-height:1.7}
+.disclaimer p+p{margin-top:10px}
+.disclaimer p strong{color:var(--white);font-weight:600}
+.url-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.url-chip{
+  font-family:'Courier New',monospace;font-size:12px;
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);
+  border-radius:6px;padding:5px 11px;color:var(--green);white-space:nowrap;
+}
+
+/* AVISO NARANJA */
+.warn-card{
+  background:var(--orange-bg);border:1px solid var(--orange-bdr);
+  border-radius:var(--radius);padding:20px 24px;margin-bottom:48px;
+  display:flex;align-items:flex-start;gap:14px;
+}
+.warn-icon{
+  width:28px;height:28px;border-radius:6px;
+  background:var(--orange);display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px;
+}
+.warn-text h3{font-size:11px;font-weight:700;color:#a34a1a;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.warn-text p{font-size:13.5px;color:#7a3a12;line-height:1.6}
+.warn-text strong{font-weight:600;color:#5c2a0c}
+
+/* FLOW */
+.flow-row{
+  display:flex;align-items:center;
+  background:var(--white);border:1px solid var(--gray);
+  border-radius:var(--radius);padding:20px 24px;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);
+  overflow-x:auto;gap:0;
+}
+.flow-node{display:flex;flex-direction:column;align-items:center;text-align:center;min-width:110px;flex-shrink:0}
+.flow-dot{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--purple-bg);border:1px solid var(--purple-bdr);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#7b52c8;margin-bottom:8px;
+}
+.flow-dot.green{background:var(--green-bg);border-color:var(--green-bdr);color:#0f8478}
+.flow-label{font-size:12px;font-weight:600;color:var(--t1);margin-bottom:2px}
+.flow-sub{font-size:10px;color:var(--t3)}
+.flow-arrow{color:var(--t3);font-size:18px;padding:0 6px;flex-shrink:0;margin-bottom:18px}
+
+/* TIP */
+.tip-card{
+  background:var(--green-bg);border:1px solid var(--green-bdr);
+  border-radius:var(--radius);padding:22px 26px;margin-bottom:48px;
+}
+.tip-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.tip-icon{
+  width:26px;height:26px;border-radius:6px;
+  background:var(--green);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;
+}
+.tip-card h3{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#0f8478}
+.tip-card p{font-size:14px;color:#1a5e58;line-height:1.65}
+.tip-card strong{font-weight:600;color:#0f3d39}
+
+/* MODULE CARDS */
+.module-card{
+  background:var(--white);border:1px solid var(--gray);
+  border-radius:var(--radius);overflow:hidden;margin-bottom:12px;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);
+}
+.module-band{height:4px;width:100%}
+.module-band.purple{background:var(--purple)}
+.module-band.gray{background:var(--gray2)}
+.module-inner{padding:22px 24px}
+.module-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:12px}
+.mod-badge{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:3px 9px;border-radius:20px;white-space:nowrap;flex-shrink:0;
+}
+.mod-badge.purple{background:var(--purple-bg);color:#7b52c8;border:1px solid var(--purple-bdr)}
+.mod-badge.gray{background:#F0F0F0;color:var(--t3);border:1px solid var(--gray)}
+.module-title{font-family:'Judson',serif;font-weight:400;font-size:21px;color:var(--t1);line-height:1.2;flex:1}
+.module-title em{font-style:italic}
+.module-title.muted{color:var(--t2)}
+.module-desc{font-size:13.5px;color:var(--t2);line-height:1.65;margin-bottom:14px}
+.module-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;padding:3px 9px;border-radius:6px;border:1px solid var(--gray);color:var(--t3);background:var(--bg-light)}
+.tag.out{background:var(--green-bg);border-color:var(--green-bdr);color:#0f8478;font-weight:600}
+
+/* TOOL CARD (diferenciada) */
+.module-card.tool-card{
+  background:var(--bg-light);
+  border:1px dashed var(--gray2);
+  box-shadow:none;
+}
+.tool-separator{
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.tool-sep-badge{
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:2px 8px;border-radius:20px;
+  background:#F0F0F0;color:var(--t3);border:1px solid var(--gray2);white-space:nowrap;
+}
+.tool-sep-line{height:1px;flex:1;background:var(--gray)}
+
+/* PLATFORM CARD */
+.platform-card{
+  background:var(--black);color:var(--white);
+  border-radius:var(--radius);padding:36px 40px;margin-bottom:16px;
+}
+.platform-card .eyebrow{color:var(--green);margin-bottom:14px}
+.platform-card h2{font-family:'Judson',serif;font-weight:400;font-size:26px;line-height:1.25;margin-bottom:14px}
+.platform-card h2 em{font-style:italic;color:var(--green)}
+.platform-card p{font-size:14px;color:var(--t4);line-height:1.7;margin-bottom:16px}
+.platform-card p strong{color:var(--white);font-weight:600}
+.platform-link{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green);color:var(--black);
+  font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  padding:8px 16px;border-radius:8px;text-decoration:none;margin-bottom:28px;
+}
+.platform-link:hover{opacity:.88}
+.skills-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+}
+.skill-chip{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);
+  border-radius:10px;padding:14px 16px;
+  display:flex;flex-direction:column;gap:6px;
+}
+.skill-chip .s-id{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--purple);
+}
+.skill-chip .s-name{font-size:13px;font-weight:500;color:var(--white);line-height:1.3}
+.skill-chip .s-hint{font-size:11px;color:var(--t3);line-height:1.4}
+.step-note{
+  margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);
+  font-size:13px;color:var(--t3);line-height:1.6;
+}
+.step-note strong{color:rgba(255,255,255,0.7);font-weight:500}
+
+/* DESIGN SYSTEM SECTION */
+.ds-card{
+  background:var(--white);border:1px solid var(--gray);
+  border-radius:var(--radius);overflow:hidden;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);
+}
+.ds-band{height:4px;background:var(--purple)}
+.ds-inner{padding:28px 28px 26px}
+.ds-title{font-family:'Judson',serif;font-weight:400;font-size:24px;color:var(--t1);margin-bottom:8px;line-height:1.2}
+.ds-title em{font-style:italic}
+.ds-intro{font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:24px}
+.ds-steps{display:flex;flex-direction:column;gap:0}
+.ds-step{
+  display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--gray);
+}
+.ds-step:last-child{border-bottom:none;padding-bottom:0}
+.ds-num{
+  width:26px;height:26px;border-radius:50%;flex-shrink:0;
+  background:var(--purple-bg);border:1px solid var(--purple-bdr);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#7b52c8;margin-top:1px;
+}
+.ds-step-body{}
+.ds-step-title{font-size:13.5px;font-weight:600;color:var(--t1);margin-bottom:4px}
+.ds-step-desc{font-size:13px;color:var(--t2);line-height:1.6}
+.ds-step-desc a{color:#7b52c8;text-decoration:none}
+.ds-step-desc a:hover{text-decoration:underline}
+.ds-step-desc strong{font-weight:600;color:var(--t1)}
+
+@media(max-width:600px){
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* FOOTER */
+.footer{
+  border-top:1px solid var(--gray);padding-top:24px;margin-top:8px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+}
+.footer-brand{font-family:'Judson',serif;font-style:italic;font-weight:700;font-size:18px;color:var(--t1)}
+.footer-contact{font-size:13px;color:var(--t3)}
+.footer-contact a{color:var(--green);text-decoration:none}
+.footer-contact a:hover{text-decoration:underline}
+
+@media(max-width:600px){
+  body{padding:32px 20px 40px}
+  .header{flex-direction:column;align-items:flex-start;gap:12px}
+  .header h1{font-size:36px}
+  .header-right{text-align:left}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div>
+      <div class="eyebrow">MVP 01 · Guía de uso</div>
+      <h1>Business <em>IA Catalyst</em></h1>
+    </div>
+    <div class="header-right">
+      <div class="label">Powered by</div>
+      <div class="brand">Winclap.</div>
+    </div>
+  </div>
+
+  <!-- DÓNDE ENCONTRAR LOS MÓDULOS -->
+  <div class="section">
+    <div class="eyebrow">01 · Descargá los módulos</div>
+    <div class="section-title">Encontralos en la <em>Winclap AI Platform</em></div>
+    <div class="section-sub">Todos los módulos están centralizados en un solo lugar. Descargalos desde ahí y en dos clicks ya los tenés en Claude.</div>
+
+    <div class="platform-card">
+      <div class="eyebrow">Winclap AI Platform</div>
+      <h2>Carpeta <em>Business IA Catalyst</em></h2>
+      <p>Ingresá a la plataforma, abrí la carpeta <strong>Business IA Catalyst</strong> y vas a encontrar los cuatro módulos listos para descargar. Hacé click en <strong>"Usar"</strong> en cada skill — se descarga automáticamente y se suma a Claude al instante.</p>
+      <a href="https://internal.winclap.com/skills-agentes" class="platform-link" target="_blank">→ Abrir Winclap AI Platform</a>
+
+      <div class="skills-grid">
+        <div class="skill-chip">
+          <span class="s-id">M1</span>
+          <span class="s-name">Pre-Discovery Brief</span>
+          <span class="s-hint">Research del prospect antes de la reunión</span>
+        </div>
+        <div class="skill-chip">
+          <span class="s-id">M2a</span>
+          <span class="s-name">Editor del Winclap Discovery</span>
+          <span class="s-hint">Notas crudas → mensaje Slack estructurado</span>
+        </div>
+        <div class="skill-chip">
+          <span class="s-id">M2b</span>
+          <span class="s-name">Estratega Comercial</span>
+          <span class="s-hint">Deal Brief estratégico para la propuesta</span>
+        </div>
+        <div class="skill-chip">
+          <span class="s-id">M3a</span>
+          <span class="s-name">Narrativa del Deck</span>
+          <span class="s-hint">Creative brief slide a slide</span>
+        </div>
+      </div>
+
+      <p class="step-note">Con las cuatro skills descargadas ya tenés los módulos en Claude. <strong>Antes de usarlos, prestá atención al siguiente paso.</strong></p>
+    </div>
+  </div>
+
+  <!-- DISCLAIMERS -->
+  <div class="section">
+    <div class="eyebrow">02 · Antes de empezar</div>
+
+    <div class="disclaimer">
+      <div class="eyebrow">Paso obligatorio — sin esto nada funciona</div>
+      <h2>Habilitá los <em>dominios permitidos</em> en tu cuenta de Claude</h2>
+      <p>Los módulos se conectan con Google Drive, Google Apps Script y Slack para crear canales, generar archivos y actualizar HubSpot. Sin estos dominios habilitados, esas acciones fallarán silenciosamente.</p>
+      <p>Andá a <strong>Configuración → Capacidades → Lista de dominios permitidos</strong> y agregá los cuatro:</p>
+      <div class="url-row">
+        <span class="url-chip">script.googleusercontent.com</span>
+        <span class="url-chip">script.google.com</span>
+        <span class="url-chip">drive.googleapis.com</span>
+        <span class="url-chip">slack.com</span>
+      </div>
+    </div>
+
+    <div class="warn-card">
+      <div class="warn-icon">!</div>
+      <div class="warn-text">
+        <h3>Solo funciona con cuenta @winclap.com</h3>
+        <p>Los módulos están integrados con el stack, las integraciones y los procesos internos de Winclap. Requieren una cuenta de Claude conectada a tu mail corporativo <strong>@winclap.com</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLUJO -->
+  <div class="section">
+    <div class="eyebrow">03 · Flujo de ejecución</div>
+    <div class="section-title">Cómo se <em>encadenan</em> los módulos</div>
+    <div class="section-sub">Cada módulo toma el output del anterior. Ejecutalos en orden dentro del mismo Proyecto de Claude.</div>
+
+    <div class="flow-row">
+      <div class="flow-node">
+        <div class="flow-dot">M1</div>
+        <span class="flow-label">Pre-discovery</span>
+        <span class="flow-sub">Brief ejecutivo</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node">
+        <div class="flow-dot">M2a</div>
+        <span class="flow-label">Winclap Discovery</span>
+        <span class="flow-sub">Notas → Slack</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node">
+        <div class="flow-dot">M2b</div>
+        <span class="flow-label">Deal Brief</span>
+        <span class="flow-sub">Estrategia comercial</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node">
+        <div class="flow-dot">M3a</div>
+        <span class="flow-label">Narrativa del deck</span>
+        <span class="flow-sub">Creative brief</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node">
+        <div class="flow-dot green">✦</div>
+        <span class="flow-label">Creación de deck</span>
+        <span class="flow-sub">Claude Design u otras</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIP -->
+  <div class="tip-card">
+    <div class="tip-head">
+      <div class="tip-icon">✦</div>
+      <h3>Recomendación de uso</h3>
+    </div>
+    <p>Creá <strong>un Proyecto de Claude por cada prospect activo</strong>. Cargá los archivos de los módulos que vayas a usar en ese proyecto y ejecutalos en orden desde adentro. Todo el contexto del deal queda centralizado — cada módulo lee el output del anterior sin que tengas que copiar y pegar nada.</p>
+  </div>
+
+  <!-- MÓDULOS -->
+  <div class="section">
+    <div class="eyebrow">04 · Los módulos</div>
+    <div class="section-title">Qué hace <em>cada uno</em></div>
+    <div class="section-sub">Cuatro módulos encadenados + una herramienta de salida. Cada archivo .md se carga como skill en el Proyecto correspondiente.</div>
+
+    <div class="module-card">
+      <div class="module-band purple"></div>
+      <div class="module-inner">
+        <div class="module-head">
+          <span class="mod-badge purple">M1</span>
+          <span class="module-title">Pre-Discovery <em>Brief</em></span>
+        </div>
+        <p class="module-desc">Antes de hablar con el prospect, este módulo hace el research por vos. Dado el nombre de la empresa y el contacto, produce un brief ejecutivo completo: modelo de negocio, noticias recientes, estructura de la cuenta, perfilado del POC y las cuatro preguntas de activación para la reunión. Output: archivo <code style="font-size:12px;font-family:monospace">.docx</code> listo para leer, deal creado en HubSpot y canal de Slack abierto.</p>
+        <div class="module-tags">
+          <span class="tag">Web research</span>
+          <span class="tag">HubSpot</span>
+          <span class="tag">Slack</span>
+          <span class="tag out">↳ Brief .docx</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-band purple"></div>
+      <div class="module-inner">
+        <div class="module-head">
+          <span class="mod-badge purple">M2a</span>
+          <span class="module-title">Editor del <em>Winclap Discovery</em></span>
+        </div>
+        <p class="module-desc">Pegás las notas crudas de la reunión de discovery — texto libre, bullets, transcripción de Granola — y el módulo las estructura, mapea los pain points a las soluciones de Winclap con el lenguaje exacto de value props, y redacta el mensaje para el canal de Slack del deal. Antes de postear, verifica si ya existe el canal y el deal en HubSpot.</p>
+        <div class="module-tags">
+          <span class="tag">Granola / notas</span>
+          <span class="tag">Value props</span>
+          <span class="tag">HubSpot</span>
+          <span class="tag out">↳ Mensaje Slack + Deal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-band purple"></div>
+      <div class="module-inner">
+        <div class="module-head">
+          <span class="mod-badge purple">M2b</span>
+          <span class="module-title">Estratega Comercial — <em>Deal Brief</em></span>
+        </div>
+        <p class="module-desc">Lee todo lo que hay en el canal de Slack del deal (intercambio del GP + respuestas del equipo de soluciones) y construye el Deal Brief estratégico completo: arco comercial, tensión central del cliente, soluciones recomendadas, posicionamiento competitivo y estructura sugerida para la propuesta. Es el input directo de M3a.</p>
+        <div class="module-tags">
+          <span class="tag">Slack channel</span>
+          <span class="tag">Solution fit</span>
+          <span class="tag">Estrategia</span>
+          <span class="tag out">↳ Deal Brief .md</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-band purple"></div>
+      <div class="module-inner">
+        <div class="module-head">
+          <span class="mod-badge purple">M3a</span>
+          <span class="module-title">Narrativa del <em>Deck</em></span>
+        </div>
+        <p class="module-desc">Toma el Deal Brief de M2b y construye la Creative Brief del deck slide a slide: dirección narrativa global, tensión del cliente como eje central y el momento "la lectura que el cliente no hizo" como peak de la historia. El output alimenta directamente cualquier herramienta de generación de slides.</p>
+        <div class="module-tags">
+          <span class="tag">Deal Brief</span>
+          <span class="tag">Narrativa</span>
+          <span class="tag">Slide structure</span>
+          <span class="tag out">↳ Creative Brief</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECK — herramienta diferenciada -->
+    <div class="module-card tool-card">
+      <div class="module-band gray"></div>
+      <div class="module-inner">
+        <div class="tool-separator">
+          <span class="tool-sep-badge">Herramienta de salida · no es un módulo</span>
+          <span class="tool-sep-line"></span>
+        </div>
+        <div class="module-head">
+          <span class="mod-badge gray">Deck</span>
+          <span class="module-title muted">Creador de <em>Deck</em></span>
+        </div>
+        <p class="module-desc">El output de M3a (la Creative Brief) se vuelca en la herramienta de creación de slides de tu elección. El sistema está optimizado para <strong style="color:var(--t1)">Claude Design</strong>, donde el L&F de Winclap ya está cargado y calibrado — pero la Creative Brief está estructurada para funcionar con cualquier tool: Canva, PowerPoint, Gamma o la que prefieras. Este paso no lo ejecuta un módulo: la Creative Brief es el puente entre la estrategia y la herramienta que uses para construir el deck.</p>
+        <div class="module-tags">
+          <span class="tag">Creative Brief</span>
+          <span class="tag">L&F Winclap</span>
+          <span class="tag">Claude Design</span>
+          <span class="tag out">↳ Deck final</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DESIGN SYSTEM -->
+  <div class="section">
+    <div class="eyebrow">05 · Claude Design</div>
+    <div class="section-title">¿No tenés el L&F de Winclap <em>en Claude Design</em>?</div>
+    <div class="section-sub">Para generar el deck con la identidad de Winclap necesitás el Design System cargado. Acá te explicamos cómo hacerlo una sola vez.</div>
+
+    <div class="ds-card">
+      <div class="ds-band"></div>
+      <div class="ds-inner">
+        <p class="ds-intro">El Winclap Design System está disponible en la misma carpeta de la plataforma. Una vez que lo cargás en Claude Design, queda habilitado para siempre — no tenés que repetir este paso.</p>
+        <div class="ds-steps">
+
+          <div class="ds-step">
+            <div class="ds-num">1</div>
+            <div class="ds-step-body">
+              <div class="ds-step-title">Descargá el Design System</div>
+              <div class="ds-step-desc">Entrá a la <a href="https://internal.winclap.com/skills-agentes" target="_blank">Winclap AI Platform</a>, abrí la carpeta <strong>Business IA Catalyst</strong> y descargá el archivo <strong>zip</strong> del Winclap Design System.</div>
+            </div>
+          </div>
+
+          <div class="ds-step">
+            <div class="ds-num">2</div>
+            <div class="ds-step-body">
+              <div class="ds-step-title">Creá un nuevo Design System en Claude Design</div>
+              <div class="ds-step-desc">Ingresá a <a href="https://claude.ai/design/p/b3c383a2-c5ff-43bf-a82e-e3f68fe4318d?setup=design-system" target="_blank">este link directo de Claude Design</a> para abrir el flujo de creación de Design System.</div>
+            </div>
+          </div>
+
+          <div class="ds-step">
+            <div class="ds-num">3</div>
+            <div class="ds-step-body">
+              <div class="ds-step-title">Subí el zip</div>
+              <div class="ds-step-desc">Claude Design te va a pedir que subas el archivo. Seleccioná el zip que descargaste y listo — Design procesa todo automáticamente y deja el sistema de diseño Winclap habilitado.</div>
+            </div>
+          </div>
+
+          <div class="ds-step">
+            <div class="ds-num">4</div>
+            <div class="ds-step-body">
+              <div class="ds-step-title">Generá el deck</div>
+              <div class="ds-step-desc">Elegí la opción <strong>"Slide deck"</strong> con el Design System de Winclap seleccionado, pegá el brief entregado por <strong>M3a — Narrativa del Deck</strong> y Claude Design se encarga del resto.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-brand">Winclap.</span>
+    <span class="footer-contact">¿Preguntas o problemas? → <a href="mailto:nicolas.stucky@winclap.com">nicolas.stucky@winclap.com</a></span>
+  </div>
+
+</div>
+</body>
+</html>
